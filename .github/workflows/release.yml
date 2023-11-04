@@ -37,6 +37,7 @@ jobs:
         id: changesets
         uses: changesets/action@v1
         with:
+          version: pnpm release
           commit: "feat(release): version packages"
           title: "feat(release): version packages"
           publish: pnpm pub:release
