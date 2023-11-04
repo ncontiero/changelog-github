@@ -1,6 +1,7 @@
+import type { Options } from "tsup";
 import { defineConfig } from "tsup";
 
-export default defineConfig({
+export const configOptions: Options = {
   clean: true,
   dts: true,
   entry: ["src/index.ts"],
@@ -8,4 +9,6 @@ export default defineConfig({
   sourcemap: true,
   target: "esnext",
   outDir: "dist",
-});
+};
+
+export default defineConfig(configOptions);
