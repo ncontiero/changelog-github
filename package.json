@@ -24,7 +24,10 @@
     "lint": "eslint . && prettier . -c",
     "lint:fix": "eslint --fix . && prettier . -w",
     "test": "vitest",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "changeset": "changeset",
+    "release": "pnpm build:internal && changeset version",
+    "pub:release": "pnpm build:internal && changeset publish"
   },
   "dependencies": {
     "@changesets/get-github-info": "^0.5.2",
