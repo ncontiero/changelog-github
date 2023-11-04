@@ -1,5 +1,11 @@
 # @dkshs/changelog-github
 
+## 1.0.1
+
+### Patch Changes
+
+- [`c64a60b`](https://github.com/dkshs/changelog-github/commit/c64a60b5ce02ed2cb39d6158e1f2e97abde24cc5) - update(docs): updating the readme to follow the new main version.
+
 ## 1.0.0
 
 ### Major Changes
