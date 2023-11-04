@@ -19,7 +19,7 @@
   ],
   "scripts": {
     "build": "tsup",
-    "build:internal": "pnpm build -- --config tsup.internal.config.ts && copyfiles ./package.json ./node_modules/@dkshs/changelog-github",
+    "build:internal": "pnpm build -- --config tsup.internal.config.ts",
     "check": "pnpm lint && pnpm typecheck && pnpm test",
     "lint": "eslint . && prettier . -c",
     "lint:fix": "eslint --fix . && prettier . -w",
