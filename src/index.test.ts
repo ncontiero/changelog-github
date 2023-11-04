@@ -12,6 +12,11 @@ type ChangeData = {
   commit: string;
   pull: number | null;
 };
+type IncludeOptions = {
+  pr?: boolean;
+  user?: boolean;
+  commit?: boolean;
+};
 
 const changes: ChangeData[] = [
   {
@@ -76,7 +81,7 @@ vi.mock(
 const getChangeset = (
   content: string,
   commit: string | undefined,
-  notUser: boolean = false,
+  exclude?: IncludeOptions,
 ) => {
   return [
     {
@@ -93,7 +98,7 @@ const getChangeset = (
       commit,
     },
     "minor",
-    { repo, notUser },
+    { repo, exclude },
   ] as const;
 };
 
@@ -161,32 +166,107 @@ test("change without a pull release", async () => {
   `);
 });
 
-test("change without a pull release and user", async () => {
+test("change without a pull release, exclude option", async () => {
   expect(
     await getReleaseLine(
-      ...getChangeset(
-        "author: @dkshs",
-        changeDataWithoutPullRequest.commit,
-        true,
-      ),
+      ...getChangeset("author: @dkshs", changeData.commit, { pr: true }),
     ),
   ).toMatchInlineSnapshot(`
     "
-    
+
+    - [\`6623231\`](https://github.com/dkshs/create-dk-app/commit/6623231) Thanks [@dkshs](https://github.com/dkshs)! - something
+    "
+  `);
+});
+
+test("change without a pull release and user", async () => {
+  expect(
+    await getReleaseLine(
+      ...getChangeset("author: @dkshs", changeDataWithoutPullRequest.commit, {
+        user: true,
+      }),
+    ),
+  ).toMatchInlineSnapshot(`
+    "
+
     - [\`6ce620e\`](https://github.com/dkshs/create-dk-app/commit/6ce620e) - something
     "
   `);
 });
 
-test("change with a pull release and not user", async () => {
+test("change without a pull release and user, exclude option", async () => {
   expect(
     await getReleaseLine(
-      ...getChangeset("author: @dkshs", changeData.commit, true),
+      ...getChangeset("author: @dkshs", changeData.commit, {
+        user: true,
+        pr: true,
+      }),
     ),
   ).toMatchInlineSnapshot(`
     "
-    
+
+    - [\`6623231\`](https://github.com/dkshs/create-dk-app/commit/6623231) - something
+    "
+  `);
+});
+
+test("change with a pull release and without user", async () => {
+  expect(
+    await getReleaseLine(
+      ...getChangeset("author: @dkshs", changeData.commit, { user: true }),
+    ),
+  ).toMatchInlineSnapshot(`
+    "
+
     - [#2](https://github.com/dkshs/create-dk-app/pull/2) [\`6623231\`](https://github.com/dkshs/create-dk-app/commit/6623231) - something
+    "
+  `);
+});
+
+test("change without a commit, exclude option", async () => {
+  expect(
+    await getReleaseLine(
+      ...getChangeset("author: @dkshs", changeData.commit, {
+        commit: true,
+      }),
+    ),
+  ).toMatchInlineSnapshot(`
+    "
+
+    - [#2](https://github.com/dkshs/create-dk-app/pull/2) Thanks [@dkshs](https://github.com/dkshs)! - something
+    "
+  `);
+});
+
+test("change without a commit and pull release, exclude option", async () => {
+  expect(
+    await getReleaseLine(
+      ...getChangeset("author: @dkshs", changeData.commit, {
+        commit: true,
+        pr: true,
+      }),
+    ),
+  ).toMatchInlineSnapshot(`
+    "
+
+    - Thanks [@dkshs](https://github.com/dkshs)! - something
+    "
+  `);
+});
+
+test("change without a commit, pull release and user, exclude option", async () => {
+  expect(
+    await getReleaseLine(
+      ...getChangeset("author: @dkshs", changeData.commit, {
+        commit: true,
+        pr: true,
+        user: true,
+      }),
+    ),
+  ).toMatchInlineSnapshot(`
+    "
+
+    - something
     "
   `);
 });

@@ -2,7 +2,10 @@
   "$schema": "https://unpkg.com/@changesets/config@2.3.1/schema.json",
   "changelog": [
     "@dkshs/changelog-github",
-    { "repo": "dkshs/changelog-github", "notUser": true }
+    {
+      "repo": "dkshs/changelog-github",
+      "exclude": { "user": true }
+    }
   ],
   "commit": false,
   "fixed": [],

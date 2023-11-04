@@ -47,6 +47,11 @@ const changelogFunctions: ChangelogFunctions = {
       );
     }
 
+    const { exclude } = options;
+    const excludePr = exclude?.pr || false;
+    const excludeUser = exclude?.user || false;
+    const excludeCommit = exclude?.commit || false;
+
     let prFromSummary: number | undefined;
     let commitFromSummary: string | undefined;
     const usersFromSummary: string[] = [];
@@ -110,9 +115,9 @@ const changelogFunctions: ChangelogFunctions = {
       : links.user;
 
     const prefix = [
-      links.pull === null ? "" : ` ${links.pull}`,
-      links.commit === null ? "" : ` ${links.commit}`,
-      users === null || options.notUser ? "" : ` Thanks ${users}!`,
+      links.pull === null || excludePr ? "" : ` ${links.pull}`,
+      links.commit === null || excludeCommit ? "" : ` ${links.commit}`,
+      users === null || excludeUser ? "" : ` Thanks ${users}!`,
     ].join("");
 
     return `\n\n-${prefix ? `${prefix} -` : ""} ${firstLine}\n${futureLines
