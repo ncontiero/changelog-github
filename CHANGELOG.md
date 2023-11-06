@@ -1,5 +1,11 @@
 # @dkshs/changelog-github
 
+## 1.0.2
+
+### Patch Changes
+
+- [`6722b04`](https://github.com/dkshs/changelog-github/commit/6722b0463c4bf02c87f600edc17d35577daa0c53) - fix(docs): formatting of codes blocks in README.
+
 ## 1.0.1
 
 ### Patch Changes
