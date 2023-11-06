@@ -38,7 +38,7 @@ There is also an optional option, which is `exclude`, an object and can have the
     "repo": "<org>/<repo>",
     "exclude": { "user": true }
   }
-  ],
+],
 // ...
 ```
 
@@ -54,7 +54,7 @@ And you can use to remove the pull releases:
     "repo": "<org>/<repo>",
     "exclude": { "pr": true }
   }
-  ],
+],
 // ...
 ```
 
@@ -68,6 +68,6 @@ And to remove the commits:
     "repo": "<org>/<repo>",
     "exclude": { "commit": true }
   }
-  ],
+],
 // ...
 ```
