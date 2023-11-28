@@ -17,8 +17,8 @@ devDependencies:
     specifier: ^2.27.1
     version: 2.27.1
   '@changesets/parse':
-    specifier: ^0.3.16
-    version: 0.3.16
+    specifier: ^0.4.0
+    version: 0.4.0
   '@changesets/types':
     specifier: ^6.0.0
     version: 6.0.0
@@ -224,13 +224,6 @@ packages:
       chalk: 2.4.2
     dev: true
 
-  /@changesets/parse@0.3.16:
-    resolution: {integrity: sha512-127JKNd167ayAuBjUggZBkmDS5fIKsthnr9jr6bdnuUljroiERW7FBTDNnNVyJ4l69PzR57pk6mXQdtJyBCJKg==}
-    dependencies:
-      '@changesets/types': 5.2.1
-      js-yaml: 3.14.1
-    dev: true
-
   /@changesets/parse@0.4.0:
     resolution: {integrity: sha512-TS/9KG2CdGXS27S+QxbZXgr8uPsP4yNJYb4BC2/NeFUj80Rni3TeD2qwWmabymxmrLo7JEsytXH1FbpKTbvivw==}
     dependencies:
@@ -263,10 +256,6 @@ packages:
 
   /@changesets/types@4.1.0:
     resolution: {integrity: sha512-LDQvVDv5Kb50ny2s25Fhm3d9QSZimsoUGBsUioj6MC3qbMUCuC8GPIvk/M6IvXx3lYhAs0lwWUQLb+VIEUCECw==}
-    dev: true
-
-  /@changesets/types@5.2.1:
-    resolution: {integrity: sha512-myLfHbVOqaq9UtUKqR/nZA/OY7xFjQMdfgfqeZIBK4d0hA6pgxArvdv8M+6NUzzBsjWLOtvApv8YHr4qM+Kpfg==}
     dev: true
 
   /@changesets/types@6.0.0:
