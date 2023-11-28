@@ -1,5 +1,11 @@
 # @dkshs/changelog-github
 
+## 1.0.3
+
+### Patch Changes
+
+- [`cff3ec2`](https://github.com/dkshs/changelog-github/commit/cff3ec2f12b86ced6d3c3268fb1e2affc29707f5) - update(deps): bump @changesets/get-github-info from 0.5.2 to 0.6.0.
+
 ## 1.0.2
 
 ### Patch Changes
