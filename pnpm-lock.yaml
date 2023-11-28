@@ -17,8 +17,8 @@ devDependencies:
     specifier: ^2.26.2
     version: 2.26.2
   '@changesets/parse':
-    specifier: ^0.3.16
-    version: 0.3.16
+    specifier: ^0.4.0
+    version: 0.4.0
   '@changesets/types':
     specifier: ^6.0.0
     version: 6.0.0
@@ -229,6 +229,13 @@ packages:
     resolution: {integrity: sha512-127JKNd167ayAuBjUggZBkmDS5fIKsthnr9jr6bdnuUljroiERW7FBTDNnNVyJ4l69PzR57pk6mXQdtJyBCJKg==}
     dependencies:
       '@changesets/types': 5.2.1
+      js-yaml: 3.14.1
+    dev: true
+
+  /@changesets/parse@0.4.0:
+    resolution: {integrity: sha512-TS/9KG2CdGXS27S+QxbZXgr8uPsP4yNJYb4BC2/NeFUj80Rni3TeD2qwWmabymxmrLo7JEsytXH1FbpKTbvivw==}
+    dependencies:
+      '@changesets/types': 6.0.0
       js-yaml: 3.14.1
     dev: true
 
