@@ -8,6 +8,5 @@ export default defineConfig({
       include: ["**/*.test.{ts,tsx,js,jsx}"],
       exclude: [...configDefaults.exclude],
     },
-    // setupFiles: ["./test/setupTests.ts"],
   },
 });

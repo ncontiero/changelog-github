@@ -17,7 +17,7 @@ A changelog entry generator for [changeset](https://github.com/changesets/change
 First Install the package:
 
 ```bash
-npm i @dkshs/changelog-github
+npm i --save-dev @dkshs/changelog-github
 ```
 
 And use it on `.changeset/config.json`:
