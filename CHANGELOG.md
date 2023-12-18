@@ -1,5 +1,13 @@
 # @dkshs/changelog-github
 
+## 1.0.4
+
+### Patch Changes
+
+- [`e47a627`](https://github.com/dkshs/changelog-github/commit/e47a62715127c7c960cd1e41f097b624a5721a7f) - update: changing from `commonjs` to `module`.
+
+- [`ee640aa`](https://github.com/dkshs/changelog-github/commit/ee640aa6d641285c9041449eaa1ba0e848151c98) - fix: `repo` option not found error.
+
 ## 1.0.3
 
 ### Patch Changes
