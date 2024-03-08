@@ -1,5 +1,13 @@
 # @dkshs/changelog-github
 
+## 1.0.5
+
+### Patch Changes
+
+- [`4ce3292`](https://github.com/dkshs/changelog-github/commit/4ce329215bfe90640df55f573715131b2c9e6fc7) - update(deps): bump tsup to 8.0.2
+
+- [`d72e929`](https://github.com/dkshs/changelog-github/commit/d72e9291dd2938134d0308cd60ab709048db347e) - update(deps): bump dotenv to 16.4.5
+
 ## 1.0.4
 
 ### Patch Changes
