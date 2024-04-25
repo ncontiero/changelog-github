@@ -23,7 +23,7 @@
   },
   "scripts": {
     "build": "tsup",
-    "build:internal": "pnpm build --config tsup.internal.config.ts",
+    "build:internal": "pnpm build -- --config tsup.internal.config.ts",
     "check": "pnpm lint && pnpm typecheck && pnpm test",
     "lint": "eslint .",
     "lint:fix": "pnpm lint --fix",
