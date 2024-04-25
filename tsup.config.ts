@@ -1,5 +1,4 @@
-import type { Options } from "tsup";
-import { defineConfig } from "tsup";
+import { type Options, defineConfig } from "tsup";
 
 export const configOptions: Options = {
   clean: true,

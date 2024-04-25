@@ -1,5 +1,4 @@
-import type { Options } from "tsup";
-import { defineConfig } from "tsup";
+import { type Options, defineConfig } from "tsup";
 import { configOptions as baseConfigOptions } from "./tsup.config";
 
 const configOptions: Options = {

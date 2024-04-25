@@ -1,29 +1,32 @@
 {
   "name": "@dkshs/changelog-github",
+  "type": "module",
   "version": "1.0.5",
   "packageManager": "pnpm@9.0.6",
   "description": "A changelog entry generator for changeset on GitHub with links to commits, PRs and optionally users.",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/dkshs/changelog-github.git"
-  },
-  "license": "MIT",
   "author": {
     "name": "DKSHS",
     "url": "https://github.com/dkshs"
   },
-  "type": "module",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/dkshs/changelog-github.git"
+  },
   "exports": "./dist/index.cjs",
   "main": "./dist/index.cjs",
   "files": [
     "dist"
   ],
+  "publishConfig": {
+    "access": "public"
+  },
   "scripts": {
     "build": "tsup",
     "build:internal": "pnpm build --config tsup.internal.config.ts",
     "check": "pnpm lint && pnpm typecheck && pnpm test",
-    "lint": "eslint . && prettier . -c",
-    "lint:fix": "eslint --fix . && prettier . -w",
+    "lint": "eslint .",
+    "lint:fix": "pnpm lint --fix",
     "test": "vitest",
     "typecheck": "tsc --noEmit",
     "changeset": "changeset",
@@ -38,15 +41,12 @@
     "@changesets/cli": "^2.27.1",
     "@changesets/parse": "^0.4.0",
     "@changesets/types": "^6.0.0",
-    "@dkshs/eslint-config": "1.5.0",
+    "@dkshs/eslint-config": "2.3.3",
     "@types/node": "^20.11.25",
     "copyfiles": "^2.4.1",
     "eslint": "^8.57.0",
     "tsup": "^8.0.2",
     "typescript": "^5.4.2",
     "vitest": "^1.3.1"
-  },
-  "publishConfig": {
-    "access": "public"
   }
 }

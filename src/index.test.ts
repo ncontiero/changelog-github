@@ -1,6 +1,6 @@
-import changelogFunctions from ".";
 import parse from "@changesets/parse";
 import { describe, expect, it, test, vi } from "vitest";
+import changelogFunctions from ".";
 
 const { getReleaseLine } = changelogFunctions;
 
@@ -37,10 +37,11 @@ vi.mock(
   "@changesets/get-github-info",
   (): typeof import("@changesets/get-github-info") => {
     return {
+      // eslint-disable-next-line require-await
       async getInfo({ commit, repo }) {
         const data = changes.find((c) => c.commit === commit);
         if (!data) {
-          throw Error(`No commit found`);
+          throw new Error(`No commit found`);
         }
         expect(commit).toBe(data.commit);
         expect(repo).toBe(data.repo);
@@ -57,10 +58,11 @@ vi.mock(
           },
         };
       },
+      // eslint-disable-next-line require-await
       async getInfoFromPullRequest({ pull, repo }) {
         const data = changes.find((c) => c.pull === pull);
         if (!data) {
-          throw Error(`No pull request found`);
+          throw new Error(`No pull request found`);
         }
         expect(pull).toBe(data.pull);
         expect(repo).toBe(data.repo);

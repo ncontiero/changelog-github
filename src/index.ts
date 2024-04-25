@@ -59,14 +59,14 @@ const changelogFunctions: ChangelogFunctions = {
     const replacedChangelog = changeset.summary
       .replace(/^\s*(?:pr|pull|pull\s+request):\s*#?(\d+)/im, (_, pr) => {
         const num = Number(pr);
-        if (!isNaN(num)) prFromSummary = num;
+        if (!Number.isNaN(num)) prFromSummary = num;
         return "";
       })
-      .replace(/^\s*commit:\s*([^\s]+)/im, (_, commit) => {
+      .replace(/^\s*commit:\s*(\S+)/im, (_, commit) => {
         commitFromSummary = commit;
         return "";
       })
-      .replace(/^\s*(?:author|user):\s*@?([^\s]+)/gim, (_, user) => {
+      .replaceAll(/^\s*(?:author|user):\s*@?(\S+)/gim, (_, user) => {
         usersFromSummary.push(user);
         return "";
       })
@@ -105,14 +105,15 @@ const changelogFunctions: ChangelogFunctions = {
       };
     })();
 
-    const users = usersFromSummary.length
-      ? usersFromSummary
-          .map(
-            (userFromSummary) =>
-              `[@${userFromSummary}](https://github.com/${userFromSummary})`,
-          )
-          .join(", ")
-      : links.user;
+    const users =
+      usersFromSummary.length > 0
+        ? usersFromSummary
+            .map(
+              (userFromSummary) =>
+                `[@${userFromSummary}](https://github.com/${userFromSummary})`,
+            )
+            .join(", ")
+        : links.user;
 
     const prefix = [
       links.pull === null || excludePr ? "" : ` ${links.pull}`,
