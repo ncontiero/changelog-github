@@ -1,5 +1,11 @@
 # @dkshs/changelog-github
 
+## 1.0.6
+
+### Patch Changes
+
+- [`b4055d2`](https://github.com/dkshs/changelog-github/commit/b4055d2e3185f307f8fd2ee156f10f49b5425935) - chore: format code
+
 ## 1.0.5
 
 ### Patch Changes
