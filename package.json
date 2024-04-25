@@ -1,6 +1,7 @@
 {
   "name": "@dkshs/changelog-github",
   "version": "1.0.5",
+  "packageManager": "pnpm@9.0.6",
   "description": "A changelog entry generator for changeset on GitHub with links to commits, PRs and optionally users.",
   "repository": {
     "type": "git",
@@ -19,7 +20,7 @@
   ],
   "scripts": {
     "build": "tsup",
-    "build:internal": "pnpm build -- --config tsup.internal.config.ts",
+    "build:internal": "pnpm build --config tsup.internal.config.ts",
     "check": "pnpm lint && pnpm typecheck && pnpm test",
     "lint": "eslint . && prettier . -c",
     "lint:fix": "eslint --fix . && prettier . -w",
