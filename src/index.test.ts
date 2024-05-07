@@ -4,7 +4,7 @@ import changelogFunctions from ".";
 
 const { getReleaseLine } = changelogFunctions;
 
-const repo = "dkshs/create-dk-app";
+const repo = "dkshs/dkcutter";
 
 type ChangeData = {
   user: string;
@@ -12,21 +12,33 @@ type ChangeData = {
   commit: string;
   pull: number | null;
 };
-type IncludeOptions = {
+type ExcludeOptions = {
+  /**
+   * Exclude the PR from the release line.
+   * @default false
+   */
   pr?: boolean;
+  /**
+   * Exclude the user from the release line.
+   * @default false
+   */
   user?: boolean;
+  /**
+   * Exclude the commit from the release line.
+   * @default false
+   */
   commit?: boolean;
 };
 
 const changes: ChangeData[] = [
   {
-    commit: "6623231",
+    commit: "bf8e488",
     user: "dkshs",
-    pull: 2,
+    pull: 134,
     repo,
   },
   {
-    commit: "6ce620e",
+    commit: "3ccbd2c",
     user: "dkshs",
     pull: null,
     repo,
@@ -83,7 +95,7 @@ vi.mock(
 const getChangeset = (
   content: string,
   commit: string | undefined,
-  exclude?: IncludeOptions,
+  exclude?: ExcludeOptions,
 ) => {
   return [
     {
@@ -122,7 +134,7 @@ describe.each([changeData.commit, "wrongcommit", undefined])(
               ),
             ),
           ).toEqual(
-            `\n\n- [#2](https://github.com/dkshs/create-dk-app/pull/2) [\`6623231\`](https://github.com/dkshs/create-dk-app/commit/6623231) Thanks [@dkshs](https://github.com/dkshs)! - something\n`,
+            `\n\n- [#134](https://github.com/dkshs/dkcutter/pull/134) [\`bf8e488\`](https://github.com/dkshs/dkcutter/commit/bf8e488) Thanks [@dkshs](https://github.com/dkshs)! - something\n`,
           );
         });
       },
@@ -133,7 +145,7 @@ describe.each([changeData.commit, "wrongcommit", undefined])(
           ...getChangeset(`commit: ${changeData.commit}`, commitFromChangeset),
         ),
       ).toEqual(
-        `\n\n- [#2](https://github.com/dkshs/create-dk-app/pull/2) [\`6623231\`](https://github.com/dkshs/create-dk-app/commit/6623231) Thanks [@dkshs](https://github.com/dkshs)! - something\n`,
+        `\n\n- [#134](https://github.com/dkshs/dkcutter/pull/134) [\`bf8e488\`](https://github.com/dkshs/dkcutter/commit/bf8e488) Thanks [@dkshs](https://github.com/dkshs)! - something\n`,
       );
     });
   },
@@ -150,7 +162,7 @@ test("with multiple authors", async () => {
   ).toMatchInlineSnapshot(`
     "
     
-    - [#2](https://github.com/dkshs/create-dk-app/pull/2) [\`6623231\`](https://github.com/dkshs/create-dk-app/commit/6623231) Thanks [@Andarist](https://github.com/Andarist), [@mitchellhamilton](https://github.com/mitchellhamilton)! - something
+    - [#134](https://github.com/dkshs/dkcutter/pull/134) [\`bf8e488\`](https://github.com/dkshs/dkcutter/commit/bf8e488) Thanks [@Andarist](https://github.com/Andarist), [@mitchellhamilton](https://github.com/mitchellhamilton)! - something
     "
   `);
 });
@@ -163,7 +175,7 @@ test("change without a pull release", async () => {
   ).toMatchInlineSnapshot(`
     "
     
-    - [\`6ce620e\`](https://github.com/dkshs/create-dk-app/commit/6ce620e) Thanks [@dkshs](https://github.com/dkshs)! - something
+    - [\`3ccbd2c\`](https://github.com/dkshs/dkcutter/commit/3ccbd2c) Thanks [@dkshs](https://github.com/dkshs)! - something
     "
   `);
 });
@@ -176,7 +188,7 @@ test("change without a pull release, exclude option", async () => {
   ).toMatchInlineSnapshot(`
     "
 
-    - [\`6623231\`](https://github.com/dkshs/create-dk-app/commit/6623231) Thanks [@dkshs](https://github.com/dkshs)! - something
+    - [\`bf8e488\`](https://github.com/dkshs/dkcutter/commit/bf8e488) Thanks [@dkshs](https://github.com/dkshs)! - something
     "
   `);
 });
@@ -191,7 +203,7 @@ test("change without a pull release and user", async () => {
   ).toMatchInlineSnapshot(`
     "
 
-    - [\`6ce620e\`](https://github.com/dkshs/create-dk-app/commit/6ce620e) - something
+    - [\`3ccbd2c\`](https://github.com/dkshs/dkcutter/commit/3ccbd2c) - something
     "
   `);
 });
@@ -207,7 +219,7 @@ test("change without a pull release and user, exclude option", async () => {
   ).toMatchInlineSnapshot(`
     "
 
-    - [\`6623231\`](https://github.com/dkshs/create-dk-app/commit/6623231) - something
+    - [\`bf8e488\`](https://github.com/dkshs/dkcutter/commit/bf8e488) - something
     "
   `);
 });
@@ -220,7 +232,7 @@ test("change with a pull release and without user", async () => {
   ).toMatchInlineSnapshot(`
     "
 
-    - [#2](https://github.com/dkshs/create-dk-app/pull/2) [\`6623231\`](https://github.com/dkshs/create-dk-app/commit/6623231) - something
+    - [#134](https://github.com/dkshs/dkcutter/pull/134) [\`bf8e488\`](https://github.com/dkshs/dkcutter/commit/bf8e488) - something
     "
   `);
 });
@@ -235,7 +247,7 @@ test("change without a commit, exclude option", async () => {
   ).toMatchInlineSnapshot(`
     "
 
-    - [#2](https://github.com/dkshs/create-dk-app/pull/2) Thanks [@dkshs](https://github.com/dkshs)! - something
+    - [#134](https://github.com/dkshs/dkcutter/pull/134) Thanks [@dkshs](https://github.com/dkshs)! - something
     "
   `);
 });
