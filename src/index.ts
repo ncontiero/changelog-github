@@ -1,7 +1,7 @@
 import type { ChangelogFunctions } from "@changesets/types";
 
-import { config } from "dotenv";
 import { getInfo, getInfoFromPullRequest } from "@changesets/get-github-info";
+import { config } from "dotenv";
 
 config();
 
