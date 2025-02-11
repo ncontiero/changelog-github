@@ -44,7 +44,7 @@
     "@dkshs/eslint-config": "4.0.2",
     "@types/node": "^22.13.1",
     "copyfiles": "^2.4.1",
-    "eslint": "^9.20.0",
+    "eslint": "^9.20.1",
     "tsup": "^8.3.6",
     "typescript": "^5.7.3",
     "vitest": "^3.0.5"
