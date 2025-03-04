@@ -42,7 +42,7 @@
     "@changesets/parse": "^0.4.1",
     "@changesets/types": "^6.1.0",
     "@dkshs/eslint-config": "4.3.0",
-    "@types/node": "^22.13.8",
+    "@types/node": "^22.13.9",
     "copyfiles": "^2.4.1",
     "eslint": "^9.21.0",
     "tsup": "^8.4.0",
