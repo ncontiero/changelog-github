@@ -4,7 +4,7 @@ import changelogFunctions from ".";
 
 const { getReleaseLine } = changelogFunctions;
 
-const repo = "dkshs/dkcutter";
+const repo = "ncontiero/dkcutter";
 
 type ChangeData = {
   user: string;
@@ -33,13 +33,13 @@ type ExcludeOptions = {
 const changes: ChangeData[] = [
   {
     commit: "bf8e488",
-    user: "dkshs",
+    user: "ncontiero",
     pull: 134,
     repo,
   },
   {
     commit: "3ccbd2c",
-    user: "dkshs",
+    user: "ncontiero",
     pull: null,
     repo,
   },
@@ -134,7 +134,7 @@ describe.each([changeData.commit, "wrongcommit", undefined])(
               ),
             ),
           ).toEqual(
-            `\n\n- [#134](https://github.com/dkshs/dkcutter/pull/134) [\`bf8e488\`](https://github.com/dkshs/dkcutter/commit/bf8e488) Thanks [@dkshs](https://github.com/dkshs)! - something\n`,
+            `\n\n- [#134](https://github.com/ncontiero/dkcutter/pull/134) [\`bf8e488\`](https://github.com/ncontiero/dkcutter/commit/bf8e488) Thanks [@ncontiero](https://github.com/ncontiero)! - something\n`,
           );
         });
       },
@@ -145,7 +145,7 @@ describe.each([changeData.commit, "wrongcommit", undefined])(
           ...getChangeset(`commit: ${changeData.commit}`, commitFromChangeset),
         ),
       ).toEqual(
-        `\n\n- [#134](https://github.com/dkshs/dkcutter/pull/134) [\`bf8e488\`](https://github.com/dkshs/dkcutter/commit/bf8e488) Thanks [@dkshs](https://github.com/dkshs)! - something\n`,
+        `\n\n- [#134](https://github.com/ncontiero/dkcutter/pull/134) [\`bf8e488\`](https://github.com/ncontiero/dkcutter/commit/bf8e488) Thanks [@ncontiero](https://github.com/ncontiero)! - something\n`,
       );
     });
   },
@@ -162,7 +162,7 @@ test("with multiple authors", async () => {
   ).toMatchInlineSnapshot(`
     "
     
-    - [#134](https://github.com/dkshs/dkcutter/pull/134) [\`bf8e488\`](https://github.com/dkshs/dkcutter/commit/bf8e488) Thanks [@Andarist](https://github.com/Andarist), [@mitchellhamilton](https://github.com/mitchellhamilton)! - something
+    - [#134](https://github.com/ncontiero/dkcutter/pull/134) [\`bf8e488\`](https://github.com/ncontiero/dkcutter/commit/bf8e488) Thanks [@Andarist](https://github.com/Andarist), [@mitchellhamilton](https://github.com/mitchellhamilton)! - something
     "
   `);
 });
@@ -170,12 +170,15 @@ test("with multiple authors", async () => {
 test("change without a pull release", async () => {
   expect(
     await getReleaseLine(
-      ...getChangeset("author: @dkshs", changeDataWithoutPullRequest.commit),
+      ...getChangeset(
+        "author: @ncontiero",
+        changeDataWithoutPullRequest.commit,
+      ),
     ),
   ).toMatchInlineSnapshot(`
     "
     
-    - [\`3ccbd2c\`](https://github.com/dkshs/dkcutter/commit/3ccbd2c) Thanks [@dkshs](https://github.com/dkshs)! - something
+    - [\`3ccbd2c\`](https://github.com/ncontiero/dkcutter/commit/3ccbd2c) Thanks [@ncontiero](https://github.com/ncontiero)! - something
     "
   `);
 });
@@ -183,12 +186,12 @@ test("change without a pull release", async () => {
 test("change without a pull release, exclude option", async () => {
   expect(
     await getReleaseLine(
-      ...getChangeset("author: @dkshs", changeData.commit, { pr: true }),
+      ...getChangeset("author: @ncontiero", changeData.commit, { pr: true }),
     ),
   ).toMatchInlineSnapshot(`
     "
 
-    - [\`bf8e488\`](https://github.com/dkshs/dkcutter/commit/bf8e488) Thanks [@dkshs](https://github.com/dkshs)! - something
+    - [\`bf8e488\`](https://github.com/ncontiero/dkcutter/commit/bf8e488) Thanks [@ncontiero](https://github.com/ncontiero)! - something
     "
   `);
 });
@@ -196,14 +199,18 @@ test("change without a pull release, exclude option", async () => {
 test("change without a pull release and user", async () => {
   expect(
     await getReleaseLine(
-      ...getChangeset("author: @dkshs", changeDataWithoutPullRequest.commit, {
-        user: true,
-      }),
+      ...getChangeset(
+        "author: @ncontiero",
+        changeDataWithoutPullRequest.commit,
+        {
+          user: true,
+        },
+      ),
     ),
   ).toMatchInlineSnapshot(`
     "
 
-    - [\`3ccbd2c\`](https://github.com/dkshs/dkcutter/commit/3ccbd2c) - something
+    - [\`3ccbd2c\`](https://github.com/ncontiero/dkcutter/commit/3ccbd2c) - something
     "
   `);
 });
@@ -211,7 +218,7 @@ test("change without a pull release and user", async () => {
 test("change without a pull release and user, exclude option", async () => {
   expect(
     await getReleaseLine(
-      ...getChangeset("author: @dkshs", changeData.commit, {
+      ...getChangeset("author: @ncontiero", changeData.commit, {
         user: true,
         pr: true,
       }),
@@ -219,7 +226,7 @@ test("change without a pull release and user, exclude option", async () => {
   ).toMatchInlineSnapshot(`
     "
 
-    - [\`bf8e488\`](https://github.com/dkshs/dkcutter/commit/bf8e488) - something
+    - [\`bf8e488\`](https://github.com/ncontiero/dkcutter/commit/bf8e488) - something
     "
   `);
 });
@@ -227,12 +234,12 @@ test("change without a pull release and user, exclude option", async () => {
 test("change with a pull release and without user", async () => {
   expect(
     await getReleaseLine(
-      ...getChangeset("author: @dkshs", changeData.commit, { user: true }),
+      ...getChangeset("author: @ncontiero", changeData.commit, { user: true }),
     ),
   ).toMatchInlineSnapshot(`
     "
 
-    - [#134](https://github.com/dkshs/dkcutter/pull/134) [\`bf8e488\`](https://github.com/dkshs/dkcutter/commit/bf8e488) - something
+    - [#134](https://github.com/ncontiero/dkcutter/pull/134) [\`bf8e488\`](https://github.com/ncontiero/dkcutter/commit/bf8e488) - something
     "
   `);
 });
@@ -240,14 +247,14 @@ test("change with a pull release and without user", async () => {
 test("change without a commit, exclude option", async () => {
   expect(
     await getReleaseLine(
-      ...getChangeset("author: @dkshs", changeData.commit, {
+      ...getChangeset("author: @ncontiero", changeData.commit, {
         commit: true,
       }),
     ),
   ).toMatchInlineSnapshot(`
     "
 
-    - [#134](https://github.com/dkshs/dkcutter/pull/134) Thanks [@dkshs](https://github.com/dkshs)! - something
+    - [#134](https://github.com/ncontiero/dkcutter/pull/134) Thanks [@ncontiero](https://github.com/ncontiero)! - something
     "
   `);
 });
@@ -255,7 +262,7 @@ test("change without a commit, exclude option", async () => {
 test("change without a commit and pull release, exclude option", async () => {
   expect(
     await getReleaseLine(
-      ...getChangeset("author: @dkshs", changeData.commit, {
+      ...getChangeset("author: @ncontiero", changeData.commit, {
         commit: true,
         pr: true,
       }),
@@ -263,7 +270,7 @@ test("change without a commit and pull release, exclude option", async () => {
   ).toMatchInlineSnapshot(`
     "
 
-    - Thanks [@dkshs](https://github.com/dkshs)! - something
+    - Thanks [@ncontiero](https://github.com/ncontiero)! - something
     "
   `);
 });
@@ -271,7 +278,7 @@ test("change without a commit and pull release, exclude option", async () => {
 test("change without a commit, pull release and user, exclude option", async () => {
   expect(
     await getReleaseLine(
-      ...getChangeset("author: @dkshs", changeData.commit, {
+      ...getChangeset("author: @ncontiero", changeData.commit, {
         commit: true,
         pr: true,
         user: true,

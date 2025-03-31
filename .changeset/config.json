@@ -3,7 +3,7 @@
   "changelog": [
     "@dkshs/changelog-github",
     {
-      "repo": "dkshs/changelog-github",
+      "repo": "ncontiero/changelog-github",
       "exclude": { "user": true }
     }
   ],

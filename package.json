@@ -5,13 +5,13 @@
   "packageManager": "pnpm@10.7.0",
   "description": "A changelog entry generator for changeset on GitHub with links to commits, PRs and optionally users.",
   "author": {
-    "name": "DKSHS",
-    "url": "https://github.com/dkshs"
+    "name": "Nicolas Contiero",
+    "url": "https://github.com/ncontiero"
   },
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/dkshs/changelog-github.git"
+    "url": "https://github.com/ncontiero/changelog-github.git"
   },
   "exports": "./dist/index.cjs",
   "main": "./dist/index.cjs",
@@ -41,7 +41,7 @@
     "@changesets/cli": "^2.28.1",
     "@changesets/parse": "^0.4.1",
     "@changesets/types": "^6.1.0",
-    "@dkshs/eslint-config": "4.6.0",
+    "@ncontiero/eslint-config": "5.1.1",
     "@types/node": "^22.13.14",
     "copyfiles": "^2.4.1",
     "eslint": "^9.23.0",

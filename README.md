@@ -4,7 +4,7 @@
 
 A changelog entry generator for [changeset](https://github.com/changesets/changesets) on GitHub with links to commits, PRs, and optionally users.
 
-[![license mit](https://img.shields.io/badge/licence-MIT-7c3aed)](https://github.com/dkshs/changelog-github/blob/master/LICENSE)
+[![license mit](https://img.shields.io/badge/licence-MIT-7c3aed)](https://github.com/ncontiero/changelog-github/blob/master/LICENSE)
 [![NPM version][npm-image]][npm-url]
 
 </div>
