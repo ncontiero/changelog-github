@@ -1,5 +1,11 @@
 # @ncontiero/changelog-github
 
+## 2.1.0
+
+### Minor Changes
+
+- [`9add529`](https://github.com/ncontiero/changelog-github/commit/9add529e0302633def27bc713afabfeec452563b) - feat: project migrated from `@dkshs/changelog-github` to `@ncontiero/changelog-github`
+
 ## @dkshs/changelog-github
 
 ### 2.0.0
