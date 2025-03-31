@@ -1,6 +1,6 @@
 <div align="center">
 
-# `@dkshs/changelog-github`
+# `@ncontiero/changelog-github`
 
 A changelog entry generator for [changeset](https://github.com/changesets/changesets) on GitHub with links to commits, PRs, and optionally users.
 
@@ -9,15 +9,15 @@ A changelog entry generator for [changeset](https://github.com/changesets/change
 
 </div>
 
-[npm-url]: https://www.npmjs.com/package/@dkshs/changelog-github
-[npm-image]: https://img.shields.io/npm/v/@dkshs/changelog-github?color=7c3aed&logoColor=7c3aed
+[npm-url]: https://www.npmjs.com/package/@ncontiero/changelog-github
+[npm-image]: https://img.shields.io/npm/v/@ncontiero/changelog-github?color=7c3aed&logoColor=7c3aed
 
 ## Getting Started
 
 First Install the package:
 
 ```bash
-npm i --save-dev @dkshs/changelog-github
+npm i --save-dev @ncontiero/changelog-github
 ```
 
 And use it on `.changeset/config.json`:
@@ -26,7 +26,7 @@ And use it on `.changeset/config.json`:
 {
   // ...
   "changelog": [
-    "@dkshs/changelog-github", { "repo": "<org>/<repo>" }
+    "@ncontiero/changelog-github", { "repo": "<org>/<repo>" }
   ]
   // ...
 }
@@ -38,7 +38,7 @@ There is also an optional option, which is `exclude`, an object and can have the
 {
   // ...
   "changelog": [
-    "@dkshs/changelog-github",
+    "@ncontiero/changelog-github",
     {
       "repo": "<org>/<repo>",
       "exclude": { "user": true }
@@ -56,7 +56,7 @@ And you can use to remove the pull releases:
 {
   // ...
   "changelog": [
-    "@dkshs/changelog-github",
+    "@ncontiero/changelog-github",
     {
       "repo": "<org>/<repo>",
       "exclude": { "pr": true }
@@ -72,7 +72,7 @@ And to remove the commits:
 {
   // ...
   "changelog": [
-    "@dkshs/changelog-github",
+    "@ncontiero/changelog-github",
     {
       "repo": "<org>/<repo>",
       "exclude": { "commit": true }

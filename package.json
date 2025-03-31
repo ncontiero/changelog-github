@@ -1,5 +1,5 @@
 {
-  "name": "@dkshs/changelog-github",
+  "name": "@ncontiero/changelog-github",
   "type": "module",
   "version": "2.0.0",
   "packageManager": "pnpm@10.7.0",
@@ -9,9 +9,13 @@
     "url": "https://github.com/ncontiero"
   },
   "license": "MIT",
+  "homepage": "https://github.com/ncontiero/changelog-github#readme",
   "repository": {
     "type": "git",
     "url": "https://github.com/ncontiero/changelog-github.git"
+  },
+  "bugs": {
+    "url": "https://github.com/ncontiero/changelog-github/issues"
   },
   "exports": "./dist/index.cjs",
   "main": "./dist/index.cjs",
