@@ -2,7 +2,7 @@
   "name": "@ncontiero/changelog-github",
   "type": "module",
   "version": "2.1.0",
-  "packageManager": "pnpm@10.8.1",
+  "packageManager": "pnpm@10.9.0",
   "description": "A changelog entry generator for changeset on GitHub with links to commits, PRs and optionally users.",
   "author": {
     "name": "Nicolas Contiero",
