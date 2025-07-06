@@ -1,5 +1,11 @@
 # @ncontiero/changelog-github
 
+## 2.1.1
+
+### Patch Changes
+
+- [`41ab491`](https://github.com/ncontiero/changelog-github/commit/41ab491cf10399d11c87a0b356470bbed792967f) - chore(deps): update dependencies
+
 ## 2.1.0
 
 ### Minor Changes
@@ -13,7 +19,6 @@
 #### Major Changes
 
 - [`1d1ccde`](https://github.com/ncontiero/changelog-github/commit/1d1ccde72beb805b0e2480e59bdc8113a99fc311) - refactor: move project from `@dkshs/changelog-github` to `@ncontiero/changelog-github`
-
   - To migrate, run the following command with your package manager:
 
   `npm rm @dkshs/changelog-github && npm i -D @ncontiero/changelog-github`
