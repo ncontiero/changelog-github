@@ -42,7 +42,7 @@
     "dotenv": "^17.2.1"
   },
   "devDependencies": {
-    "@changesets/cli": "^2.29.5",
+    "@changesets/cli": "^2.29.6",
     "@changesets/parse": "^0.4.1",
     "@changesets/types": "^6.1.0",
     "@ncontiero/eslint-config": "6.1.0",
