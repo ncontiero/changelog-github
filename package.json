@@ -1,7 +1,7 @@
 {
   "name": "@ncontiero/changelog-github",
   "type": "module",
-  "version": "2.1.1",
+  "version": "2.1.2",
   "packageManager": "pnpm@10.18.2",
   "description": "A changelog entry generator for changeset on GitHub with links to commits, PRs and optionally users.",
   "author": {
@@ -17,7 +17,15 @@
   "bugs": {
     "url": "https://github.com/ncontiero/changelog-github/issues"
   },
-  "keywords": ["changelog", "github", "changeset", "release", "automation", "release-notes", "versioning"],
+  "keywords": [
+    "changelog",
+    "github",
+    "changeset",
+    "release",
+    "automation",
+    "release-notes",
+    "versioning"
+  ],
   "exports": "./dist/index.cjs",
   "main": "./dist/index.cjs",
   "files": [
