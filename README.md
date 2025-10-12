@@ -25,9 +25,7 @@ And use it on `.changeset/config.json`:
 ```json
 {
   // ...
-  "changelog": [
-    "@ncontiero/changelog-github", { "repo": "<org>/<repo>" }
-  ]
+  "changelog": ["@ncontiero/changelog-github", { "repo": "<org>/<repo>" }]
   // ...
 }
 ```
