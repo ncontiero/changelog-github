@@ -17,6 +17,7 @@
   "bugs": {
     "url": "https://github.com/ncontiero/changelog-github/issues"
   },
+  "keywords": ["changelog", "github", "changeset", "release", "automation", "release-notes", "versioning"],
   "exports": "./dist/index.cjs",
   "main": "./dist/index.cjs",
   "files": [
