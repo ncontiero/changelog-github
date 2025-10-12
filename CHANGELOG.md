@@ -1,5 +1,11 @@
 # @ncontiero/changelog-github
 
+## 2.1.2
+
+### Patch Changes
+
+- [`303f605`](https://github.com/ncontiero/changelog-github/commit/303f6052456c77b6f9aa1a757e89918b018e9646) - chore(package): add keywords to package.json
+
 ## 2.1.1
 
 ### Patch Changes
