@@ -48,7 +48,7 @@
   },
   "dependencies": {
     "@changesets/get-github-info": "^0.7.0",
-    "dotenv": "^17.2.4"
+    "dotenv": "^17.3.1"
   },
   "devDependencies": {
     "@changesets/cli": "^2.29.8",
