@@ -1,5 +1,13 @@
 # @ncontiero/changelog-github
 
+## 2.1.3
+
+### Patch Changes
+
+- [`7a9b5a2`](https://github.com/ncontiero/changelog-github/commit/7a9b5a200347e74d1d7cdf3464f58d3b00cf6bea) - refactor(build): migrate from tsup to tsdown
+
+- [`a5527f0`](https://github.com/ncontiero/changelog-github/commit/a5527f037d0992e7c298998132435830bc597536) - chore(deps): update tooling dependencies and TypeScript config
+
 ## 2.1.2
 
 ### Patch Changes
