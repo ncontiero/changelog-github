@@ -35,16 +35,15 @@
     "access": "public"
   },
   "scripts": {
-    "build": "tsup",
-    "build:internal": "pnpm build -- --config tsup.internal.config.ts",
+    "build": "tsdown",
     "check": "pnpm lint && pnpm typecheck && pnpm test",
     "lint": "eslint .",
     "lint:fix": "pnpm lint --fix",
     "test": "vitest",
     "typecheck": "tsc --noEmit",
     "changeset": "changeset",
-    "release": "pnpm build:internal && changeset version",
-    "pub:release": "pnpm build:internal && changeset publish"
+    "release": "pnpm build && changeset version",
+    "pub:release": "pnpm build && changeset publish"
   },
   "dependencies": {
     "@changesets/get-github-info": "^0.7.0",
@@ -58,7 +57,7 @@
     "@types/node": "^25.3.3",
     "copyfiles": "^2.4.1",
     "eslint": "^9.39.3",
-    "tsup": "^8.5.1",
+    "tsdown": "^0.21.9",
     "typescript": "^5.9.3",
     "vitest": "^4.0.18"
   }
