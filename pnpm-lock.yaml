@@ -28,7 +28,7 @@ importers:
         specifier: 7.2.0
         version: 7.2.0(@typescript-eslint/rule-tester@8.58.2(eslint@10.3.0(jiti@2.6.1))(typescript@6.0.3))(@typescript-eslint/typescript-estree@8.58.2(typescript@6.0.3))(@typescript-eslint/utils@8.58.2(eslint@10.3.0(jiti@2.6.1))(typescript@6.0.3))(eslint@10.3.0(jiti@2.6.1))(tailwindcss@4.2.2)(typescript@6.0.3)
       '@types/node':
-        specifier: ^25.6.1
+        specifier: ^25.6.2
         version: 25.6.2
       copyfiles:
         specifier: ^2.4.1
