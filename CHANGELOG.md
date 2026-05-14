@@ -1,5 +1,15 @@
 # @ncontiero/changelog-github
 
+## 2.1.4
+
+### Patch Changes
+
+- [`4a1c2df`](https://github.com/ncontiero/changelog-github/commit/4a1c2dfad304c25eba0d94bb8b1297218e1b42fb) - refactor: extract changelog parsing regex constants
+
+- [`194463a`](https://github.com/ncontiero/changelog-github/commit/194463a9ed22496b0e26e56c6f297d9f9f9f70d5) - refactor: improve typescript and test typings configuration
+
+- [`76bd5b0`](https://github.com/ncontiero/changelog-github/commit/76bd5b06d095d1855101228fe12261bac4913d5f) - chore: shorten linked commit hash in changelog entries
+
 ## 2.1.3
 
 ### Patch Changes
