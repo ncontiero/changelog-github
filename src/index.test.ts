@@ -1,3 +1,7 @@
+import type {
+  getInfo,
+  getInfoFromPullRequest,
+} from "@changesets/get-github-info";
 import parse from "@changesets/parse";
 import { describe, expect, it, test, vi } from "vitest";
 import changelogFunctions from ".";
@@ -49,15 +53,14 @@ vi.mock(
   "@changesets/get-github-info",
   (): typeof import("@changesets/get-github-info") => {
     return {
-      // eslint-disable-next-line require-await
-      async getInfo({ commit, repo }) {
+      async getInfo({ commit, repo }): ReturnType<typeof getInfo> {
         const data = changes.find((c) => c.commit === commit);
         if (!data) {
           throw new Error(`No commit found`);
         }
         expect(commit).toBe(data.commit);
         expect(repo).toBe(data.repo);
-        return {
+        return Promise.resolve({
           pull: data.pull,
           user: data.user,
           links: {
@@ -68,17 +71,19 @@ vi.mock(
                 : null,
             commit: `[\`${data.commit}\`](https://github.com/${data.repo}/commit/${data.commit})`,
           },
-        };
+        });
       },
-      // eslint-disable-next-line require-await
-      async getInfoFromPullRequest({ pull, repo }) {
+      async getInfoFromPullRequest({
+        pull,
+        repo,
+      }): ReturnType<typeof getInfoFromPullRequest> {
         const data = changes.find((c) => c.pull === pull);
         if (!data) {
           throw new Error(`No pull request found`);
         }
         expect(pull).toBe(data.pull);
         expect(repo).toBe(data.repo);
-        return {
+        return Promise.resolve({
           commit: data.commit,
           user: data.user,
           links: {
@@ -86,7 +91,7 @@ vi.mock(
             pull: `[#${data.pull}](https://github.com/${data.repo}/pull/${data.pull})`,
             commit: `[\`${data.commit}\`](https://github.com/${data.repo}/commit/${data.commit})`,
           },
-        };
+        });
       },
     };
   },
