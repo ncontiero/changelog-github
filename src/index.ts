@@ -5,6 +5,9 @@ import { config } from "dotenv";
 
 config();
 
+const PULL_REQUEST_REGEX = /^\s*(?:pr|pull|pull\s+request):\s*#?(\d+)/im;
+const COMMIT_REGEX = /^\s*commit:\s*(\S+)/im;
+
 const changelogFunctions: ChangelogFunctions = {
   getDependencyReleaseLine: async (
     changesets,
@@ -57,12 +60,12 @@ const changelogFunctions: ChangelogFunctions = {
     const usersFromSummary: string[] = [];
 
     const replacedChangelog = changeset.summary
-      .replace(/^\s*(?:pr|pull|pull\s+request):\s*#?(\d+)/im, (_, pr) => {
+      .replace(PULL_REQUEST_REGEX, (_, pr) => {
         const num = Number(pr);
         if (!Number.isNaN(num)) prFromSummary = num;
         return "";
       })
-      .replace(/^\s*commit:\s*(\S+)/im, (_, commit) => {
+      .replace(COMMIT_REGEX, (_, commit) => {
         commitFromSummary = commit;
         return "";
       })
