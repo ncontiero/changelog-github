@@ -97,9 +97,10 @@ const changelogFunctions: ChangelogFunctions = {
           pull: prFromSummary,
         });
         if (commitFromSummary) {
+          const shortCommitId = commitFromSummary.slice(0, 7);
           links = {
             ...links,
-            commit: `[\`${commitFromSummary}\`](https://github.com/${repo}/commit/${commitFromSummary})`,
+            commit: `[\`${shortCommitId}\`](https://github.com/${repo}/commit/${commitFromSummary})`,
           };
         }
         return links;
