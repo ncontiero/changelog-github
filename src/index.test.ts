@@ -6,13 +6,13 @@ const { getReleaseLine } = changelogFunctions;
 
 const repo = "ncontiero/dkcutter";
 
-type ChangeData = {
+interface ChangeData {
   user: string;
   repo: string;
   commit: string;
   pull: number | null;
-};
-type ExcludeOptions = {
+}
+interface ExcludeOptions {
   /**
    * Exclude the PR from the release line.
    * @default false
@@ -28,7 +28,7 @@ type ExcludeOptions = {
    * @default false
    */
   commit?: boolean;
-};
+}
 
 const changes: ChangeData[] = [
   {
