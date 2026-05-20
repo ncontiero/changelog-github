@@ -54,7 +54,7 @@
     "@changesets/parse": "^0.4.3",
     "@changesets/types": "^6.1.0",
     "@ncontiero/eslint-config": "8.2.1",
-    "@types/node": "^25.8.0",
+    "@types/node": "^25.9.0",
     "copyfiles": "^2.4.1",
     "eslint": "^10.4.0",
     "tsdown": "^0.22.0",
