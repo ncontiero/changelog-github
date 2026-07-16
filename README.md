@@ -6,13 +6,10 @@
 
 Generates GitHub release notes with links to commits, pull requests, and authors, featuring advanced exclusion options and summary overrides.
 
-[![license mit](https://img.shields.io/badge/licence-MIT-7c3aed)](https://github.com/ncontiero/changelog-github/blob/master/LICENSE)
-[![NPM version][npm-image]][npm-url]
+[![Open on npmx.dev](https://npmx.dev/api/registry/badge/version/@ncontiero/changelog-github?color=7c3aed&name=true)](https://npmx.dev/package/@ncontiero/changelog-github)
+[![Open License](https://npmx.dev/api/registry/badge/license/@ncontiero/changelog-github?color=7c3aed)](https://github.com/ncontiero/changelog-github/blob/main/LICENSE)
 
 </div>
-
-[npm-url]: https://www.npmjs.com/package/@ncontiero/changelog-github
-[npm-image]: https://img.shields.io/npm/v/@ncontiero/changelog-github?color=7c3aed&logoColor=7c3aed
 
 ## Getting Started
 
