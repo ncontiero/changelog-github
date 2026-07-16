@@ -1,7 +1,6 @@
 import type { ChangelogFunctions } from "@changesets/types";
 
 import { getInfo, getInfoFromPullRequest } from "@changesets/get-github-info";
-import { config } from "dotenv";
 
 interface Options {
   repo: string;
@@ -14,8 +13,6 @@ interface Options {
 
 const PULL_REQUEST_REGEX = /^\s*(?:pr|pull|pull\s+request):\s*#?(\d+)/im;
 const COMMIT_REGEX = /^\s*commit:\s*(\S+)/im;
-
-config();
 
 const changelogFunctions: ChangelogFunctions = {
   getDependencyReleaseLine: async (
