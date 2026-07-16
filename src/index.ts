@@ -9,6 +9,7 @@ interface Options {
     user?: boolean;
     commit?: boolean;
   };
+  ignoreUsers?: string[];
 }
 
 const PULL_REQUEST_REGEX = /^\s*(?:pr|pull|pull\s+request):\s*#?(\d+)/im;
@@ -65,7 +66,7 @@ const changelogFunctions: ChangelogFunctions = {
 
     let prFromSummary: number | undefined;
     let commitFromSummary: string | undefined;
-    const usersFromSummary: string[] = [];
+    const usersFromSummary = new Set<string>();
 
     const replacedChangelog = changeset.summary
       .replace(PULL_REQUEST_REGEX, (_, pr) => {
@@ -78,7 +79,7 @@ const changelogFunctions: ChangelogFunctions = {
         return "";
       })
       .replaceAll(/^\s*(?:author|user):\s*@?(\S+)/gim, (_, user) => {
-        usersFromSummary.push(String(user));
+        usersFromSummary.add(String(user));
         return "";
       })
       .trim();
@@ -87,9 +88,9 @@ const changelogFunctions: ChangelogFunctions = {
       .split("\n")
       .map((l) => l.trimEnd());
 
-    const links = await (async () => {
+    const { links, userLogin } = await (async () => {
       if (prFromSummary !== undefined) {
-        let { links } = await getInfoFromPullRequest({
+        let { links, user } = await getInfoFromPullRequest({
           repo,
           pull: prFromSummary,
         });
@@ -100,32 +101,43 @@ const changelogFunctions: ChangelogFunctions = {
             commit: `[\`${shortCommitId}\`](https://github.com/${repo}/commit/${commitFromSummary})`,
           };
         }
-        return links;
+        return { links, userLogin: user };
       }
       const commitToFetchFrom = commitFromSummary || changeset.commit;
       if (commitToFetchFrom) {
-        const { links } = await getInfo({
+        const { links, user } = await getInfo({
           repo,
           commit: commitToFetchFrom,
         });
-        return links;
+        return { links, userLogin: user };
       }
       return {
-        commit: null,
-        pull: null,
-        user: null,
+        links: {
+          commit: null,
+          pull: null,
+          user: null,
+        },
+        userLogin: null,
       };
     })();
 
-    const users =
-      usersFromSummary.length > 0
-        ? usersFromSummary
-            .map(
-              (userFromSummary) =>
-                `[@${userFromSummary}](https://github.com/${userFromSummary})`,
-            )
-            .join(", ")
-        : links.user;
+    const ignoreUsers = new Set(
+      (options.ignoreUsers || []).map((u) => u.toLowerCase()),
+    );
+
+    let users: string | null = null;
+    if (usersFromSummary.size > 0) {
+      const usersToThank = Array.from(usersFromSummary).filter(
+        (u) => !ignoreUsers.has(u.toLowerCase()),
+      );
+      if (usersToThank.length > 0) {
+        users = usersToThank
+          .map((u) => `[@${u}](https://github.com/${u})`)
+          .join(", ");
+      }
+    } else if (userLogin && !ignoreUsers.has(userLogin.toLowerCase())) {
+      users = links.user;
+    }
 
     const parts = [];
     if (links.pull !== null && !excludePr) parts.push(links.pull);

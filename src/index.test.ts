@@ -101,6 +101,7 @@ const getChangeset = (
   content: string,
   commit: string | undefined,
   exclude?: ExcludeOptions,
+  ignoreUsers?: string[],
 ) => {
   return [
     {
@@ -117,7 +118,7 @@ const getChangeset = (
       commit,
     },
     "minor",
-    { repo, exclude },
+    { repo, exclude, ignoreUsers },
   ] as const;
 };
 
@@ -322,6 +323,67 @@ test("override with user keyword instead of author", async () => {
     "
 
     - [#134](https://github.com/ncontiero/dkcutter/pull/134) [\`bf8e488\`](https://github.com/ncontiero/dkcutter/commit/bf8e488) Thanks [@ncontiero](https://github.com/ncontiero)! - something
+    "
+  `);
+});
+
+test("ignoreUsers excludes the author from getInfo", async () => {
+  expect(
+    await getReleaseLine(
+      ...getChangeset("", changeData.commit, undefined, ["ncontiero"]),
+    ),
+  ).toMatchInlineSnapshot(`
+    "
+
+    - [#134](https://github.com/ncontiero/dkcutter/pull/134) [\`bf8e488\`](https://github.com/ncontiero/dkcutter/commit/bf8e488) - something
+    "
+  `);
+});
+
+test("ignoreUsers excludes the author from summary override", async () => {
+  expect(
+    await getReleaseLine(
+      ...getChangeset("author: @ncontiero", changeData.commit, undefined, [
+        "ncontiero",
+      ]),
+    ),
+  ).toMatchInlineSnapshot(`
+    "
+
+    - [#134](https://github.com/ncontiero/dkcutter/pull/134) [\`bf8e488\`](https://github.com/ncontiero/dkcutter/commit/bf8e488) - something
+    "
+  `);
+});
+
+test("ignoreUsers excludes only the ignored author when multiple exist", async () => {
+  expect(
+    await getReleaseLine(
+      ...getChangeset(
+        ["author: @ncontiero", "author: @someone"].join("\n"),
+        changeData.commit,
+        undefined,
+        ["ncontiero"],
+      ),
+    ),
+  ).toMatchInlineSnapshot(`
+    "
+
+    - [#134](https://github.com/ncontiero/dkcutter/pull/134) [\`bf8e488\`](https://github.com/ncontiero/dkcutter/commit/bf8e488) Thanks [@someone](https://github.com/someone)! - something
+    "
+  `);
+});
+
+test("ignoreUsers is case-insensitive", async () => {
+  expect(
+    await getReleaseLine(
+      ...getChangeset("author: @NContiero", changeData.commit, undefined, [
+        "ncontiero",
+      ]),
+    ),
+  ).toMatchInlineSnapshot(`
+    "
+
+    - [#134](https://github.com/ncontiero/dkcutter/pull/134) [\`bf8e488\`](https://github.com/ncontiero/dkcutter/commit/bf8e488) - something
     "
   `);
 });

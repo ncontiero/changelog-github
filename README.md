@@ -57,6 +57,20 @@ You can customize the generated changelog by providing an `exclude` object. This
 
 _Note: All keys inside `exclude` are optional and default to `false`._
 
+You can also use the `ignoreUsers` array to exclude specific usernames from being thanked. This is perfect for single-maintainer packages or bots where you don't need a "Thanks..." message for yourself, but still want to thank external contributors.
+
+```json
+{
+  "changelog": [
+    "@ncontiero/changelog-github",
+    {
+      "repo": "<org>/<repo>",
+      "ignoreUsers": ["your-username", "renovate[bot]"]
+    }
+  ]
+}
+```
+
 ## Advanced Usage (Overrides)
 
 You can manually override the PR, commit, or user directly from the changeset summary text! Just include them in your changeset markdown:
