@@ -2,7 +2,9 @@
 
 # `@ncontiero/changelog-github`
 
-A changelog entry generator for [changeset](https://github.com/changesets/changesets) on GitHub with links to commits, PRs, and optionally users.
+**A custom changelog entry generator for [Changesets](https://github.com/changesets/changesets)**
+
+Generates GitHub release notes with links to commits, pull requests, and authors, featuring advanced exclusion options and summary overrides.
 
 [![license mit](https://img.shields.io/badge/licence-MIT-7c3aed)](https://github.com/ncontiero/changelog-github/blob/master/LICENSE)
 [![NPM version][npm-image]][npm-url]
@@ -14,68 +16,65 @@ A changelog entry generator for [changeset](https://github.com/changesets/change
 
 ## Getting Started
 
-First Install the package:
+First, install the package:
 
 ```bash
 npm i --save-dev @ncontiero/changelog-github
 ```
 
-And use it on `.changeset/config.json`:
+Then, add it to your `.changeset/config.json`:
 
 ```json
 {
-  // ...
-  "changelog": ["@ncontiero/changelog-github", { "repo": "<org>/<repo>" }]
-  // ...
+  "changelog": [
+    "@ncontiero/changelog-github",
+    {
+      "repo": "<org>/<repo>"
+    }
+  ]
 }
 ```
 
-There is also an optional option, which is `exclude`, an object and can have the `user`,`pr` and `commit` keys and their values being boolean.
+## Configuration
+
+You can customize the generated changelog by providing an `exclude` object. This is useful if you want to keep your changelogs cleaner by removing pull requests, commits, or author mentions.
 
 ```json
 {
-  // ...
   "changelog": [
     "@ncontiero/changelog-github",
     {
       "repo": "<org>/<repo>",
-      "exclude": { "user": true }
+      "exclude": {
+        "user": true,
+        "pr": true,
+        "commit": true
+      }
     }
   ]
-  // ...
 }
 ```
 
-This option does not add the comment: "Thanks <@user>!".
+_Note: All keys inside `exclude` are optional and default to `false`._
 
-And you can use to remove the pull releases:
+## Advanced Usage (Overrides)
 
-```json
-{
-  // ...
-  "changelog": [
-    "@ncontiero/changelog-github",
-    {
-      "repo": "<org>/<repo>",
-      "exclude": { "pr": true }
-    }
-  ]
-  // ...
-}
+You can manually override the PR, commit, or user directly from the changeset summary text! Just include them in your changeset markdown:
+
+```markdown
+---
+"my-package": patch
+---
+
+pr: #42
+commit: 7c3aed7
+author: @ncontiero
+
+Fixed an annoying bug that crashed the app.
 ```
 
-And to remove the commits:
+## Example Output
 
-```json
-{
-  // ...
-  "changelog": [
-    "@ncontiero/changelog-github",
-    {
-      "repo": "<org>/<repo>",
-      "exclude": { "commit": true }
-    }
-  ]
-  // ...
-}
-```
+By default (without exclusions), a changeset entry will be formatted like this in your `CHANGELOG.md`:
+
+> - [#42](https://github.com/org/repo/pull/42) [`7c3aed7`](https://github.com/org/repo/commit/7c3aed7) Thanks [@ncontiero](https://github.com/ncontiero)! - Fixed an annoying bug that crashed the app.

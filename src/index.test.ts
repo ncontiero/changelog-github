@@ -296,3 +296,32 @@ test("change without a commit, pull release and user, exclude option", async () 
     "
   `);
 });
+
+test("override pr, commit, and author simultaneously", async () => {
+  expect(
+    await getReleaseLine(
+      ...getChangeset(
+        ["pr: #134", "commit: 5d18840", "author: @ncontiero"].join("\n"),
+        undefined,
+      ),
+    ),
+  ).toMatchInlineSnapshot(`
+    "
+
+    - [#134](https://github.com/ncontiero/dkcutter/pull/134) [\`5d18840\`](https://github.com/ncontiero/dkcutter/commit/5d18840) Thanks [@ncontiero](https://github.com/ncontiero)! - something
+    "
+  `);
+});
+
+test("override with user keyword instead of author", async () => {
+  expect(
+    await getReleaseLine(
+      ...getChangeset("user: @ncontiero", changeData.commit),
+    ),
+  ).toMatchInlineSnapshot(`
+    "
+
+    - [#134](https://github.com/ncontiero/dkcutter/pull/134) [\`bf8e488\`](https://github.com/ncontiero/dkcutter/commit/bf8e488) Thanks [@ncontiero](https://github.com/ncontiero)! - something
+    "
+  `);
+});

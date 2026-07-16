@@ -3,7 +3,7 @@
   "type": "module",
   "version": "2.1.4",
   "packageManager": "pnpm@11.13.1",
-  "description": "A changelog entry generator for changeset on GitHub with links to commits, PRs and optionally users.",
+  "description": "A custom changelog entry generator for Changesets on GitHub. Features advanced exclusion options, summary overrides, and links to commits, PRs, and authors.",
   "author": {
     "name": "Nicolas Contiero",
     "url": "https://github.com/ncontiero"

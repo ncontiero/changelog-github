@@ -18,9 +18,9 @@ const changelogFunctions: ChangelogFunctions = {
   getDependencyReleaseLine: async (
     changesets,
     dependenciesUpdated,
-    options: Options,
+    options?: Options,
   ) => {
-    if (!options.repo) {
+    if (!options || !options.repo) {
       throw new Error(
         'Please provide a repo to this changelog generator like this:\n"changelog": ["@ncontiero/changelog-github", { "repo": "org/repo" }]',
       );
@@ -127,13 +127,14 @@ const changelogFunctions: ChangelogFunctions = {
             .join(", ")
         : links.user;
 
-    const prefix = [
-      links.pull === null || excludePr ? "" : ` ${links.pull}`,
-      links.commit === null || excludeCommit ? "" : ` ${links.commit}`,
-      users === null || excludeUser ? "" : ` Thanks ${users}!`,
-    ].join("");
+    const parts = [];
+    if (links.pull !== null && !excludePr) parts.push(links.pull);
+    if (links.commit !== null && !excludeCommit) parts.push(links.commit);
+    if (users !== null && !excludeUser) parts.push(`Thanks ${users}!`);
 
-    return `\n\n-${prefix ? `${prefix} -` : ""} ${firstLine}\n${futureLines
+    const prefix = parts.length > 0 ? `${parts.join(" ")} - ` : "";
+
+    return `\n\n- ${prefix}${firstLine}\n${futureLines
       .map((l) => `  ${l}`)
       .join("\n")}`;
   },
