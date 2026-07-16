@@ -1,10 +1,11 @@
 import { defineConfig } from "tsdown";
 
 export default defineConfig({
-  clean: true,
-  entry: ["src/index.ts"],
-  format: ["cjs"],
-  sourcemap: true,
-  target: "esnext",
+  entry: "src/index.ts",
   outDir: "dist",
+  exports: true,
+  clean: true,
+  sourcemap: true,
+  format: "esm",
+  target: "esnext",
 });

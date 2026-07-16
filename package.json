@@ -26,8 +26,10 @@
     "release-notes",
     "versioning"
   ],
-  "exports": "./dist/index.cjs",
-  "main": "./dist/index.cjs",
+  "exports": {
+    ".": "./dist/index.mjs",
+    "./package.json": "./package.json"
+  },
   "files": [
     "dist"
   ],
