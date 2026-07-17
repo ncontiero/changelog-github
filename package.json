@@ -1,7 +1,7 @@
 {
   "name": "@ncontiero/changelog-github",
   "type": "module",
-  "version": "2.1.4",
+  "version": "3.0.0",
   "packageManager": "pnpm@11.13.1",
   "description": "A custom changelog entry generator for Changesets on GitHub. Features advanced exclusion options, summary overrides, and links to commits, PRs, and authors.",
   "author": {

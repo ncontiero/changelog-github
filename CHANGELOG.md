@@ -1,5 +1,23 @@
 # @ncontiero/changelog-github
 
+## 3.0.0
+
+### Major Changes
+
+- [`583ee2d`](https://github.com/ncontiero/changelog-github/commit/583ee2dd80a41bef9effd305c246cf0abec68d16) - build: drop CJS build, now it's ESM-only
+
+### Minor Changes
+
+- [`2111a1d`](https://github.com/ncontiero/changelog-github/commit/2111a1dd5202d3dcf8122f2a7ddd69f5792a7326) - feat: add `ignoreUsers` option to exclude specific usernames from being thanked
+
+### Patch Changes
+
+- [`5d18840`](https://github.com/ncontiero/changelog-github/commit/5d1884028df5d8907d822aa59996e62d06eac7cd) - chore: remove dotenv dependency and configuration usage
+
+- [`ada0cda`](https://github.com/ncontiero/changelog-github/commit/ada0cda453432ab506eb199b607745744e749227) - refactor: improve formatting and options checking, rewrite README with complete examples and advanced features
+
+- [`864753e`](https://github.com/ncontiero/changelog-github/commit/864753efdebcf36c3b79a1e5733d43d65a8c39f6) - docs: update README badges to use npmx.dev and main branch license link
+
 ## 2.1.4
 
 ### Patch Changes
