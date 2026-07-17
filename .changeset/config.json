@@ -4,7 +4,11 @@
     "../src/index.ts",
     {
       "repo": "ncontiero/changelog-github",
-      "exclude": { "user": true }
+      "ignoreUsers": [
+        "ncontiero",
+        "dependabot[bot]",
+        "github-actions[bot]"
+      ]
     }
   ],
   "commit": false,
