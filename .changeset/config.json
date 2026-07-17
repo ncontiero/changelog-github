@@ -6,6 +6,7 @@
       "repo": "ncontiero/changelog-github",
       "ignoreUsers": [
         "ncontiero",
+        "renovate[bot]",
         "dependabot[bot]",
         "github-actions[bot]"
       ]
