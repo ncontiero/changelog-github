@@ -1,5 +1,15 @@
 # @ncontiero/changelog-github
 
+## 3.1.0
+
+### Minor Changes
+
+- [`3d3fe24`](https://github.com/ncontiero/changelog-github/commit/3d3fe2476b20f5d109688f4627ac7c66ac4826d1) - feat: migrate to `@changesets/get-github-info` v1
+
+### Patch Changes
+
+- [`99441d5`](https://github.com/ncontiero/changelog-github/commit/99441d57edcf3834a39542ff796af15e7902ab1d) - chore(build): disable sourcemaps to reduce package size
+
 ## 3.0.0
 
 ### Major Changes
