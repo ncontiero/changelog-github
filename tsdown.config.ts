@@ -5,7 +5,4 @@ export default defineConfig({
   outDir: "dist",
   exports: true,
   clean: true,
-  sourcemap: true,
-  format: "esm",
-  target: "esnext",
 });
