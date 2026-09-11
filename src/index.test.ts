@@ -1,9 +1,6 @@
-import type {
-  getInfo,
-  getInfoFromPullRequest,
-} from "@changesets/get-github-info";
-import parse from "@changesets/parse";
-import { describe, expect, it, test, vi } from "vitest";
+import type { CommitInfo, PullRequestInfo } from "@changesets/get-github-info";
+import { parseChangesetFile as parse } from "@changesets/parse";
+import { describe, expect, it, vi } from "vitest";
 import changelogFunctions from ".";
 
 const { getReleaseLine } = changelogFunctions;
@@ -11,7 +8,7 @@ const { getReleaseLine } = changelogFunctions;
 const repo = "ncontiero/dkcutter";
 
 interface ChangeData {
-  user: string;
+  author: string;
   repo: string;
   commit: string;
   pull: number | null;
@@ -37,13 +34,13 @@ interface ExcludeOptions {
 const changes: ChangeData[] = [
   {
     commit: "bf8e488",
-    user: "ncontiero",
+    author: "ncontiero",
     pull: 134,
     repo,
   },
   {
     commit: "3ccbd2c",
-    user: "ncontiero",
+    author: "ncontiero",
     pull: null,
     repo,
   },
@@ -52,44 +49,66 @@ const changes: ChangeData[] = [
 vi.mock(
   "@changesets/get-github-info",
   (): typeof import("@changesets/get-github-info") => {
+    const urls = {
+      commit: (data: ChangeData) =>
+        `https://github.com/${data.repo}/commit/${data.commit}`,
+      pull: (data: ChangeData) =>
+        `https://github.com/${data.repo}/pull/${data.pull}`,
+      author: (data: ChangeData) => `https://github.com/${data.author}`,
+    };
+
     return {
-      async getInfo({ commit, repo }): ReturnType<typeof getInfo> {
+      async getCommitInfo({ commit, repo }): Promise<CommitInfo> {
         const data = changes.find((c) => c.commit === commit);
         if (!data) {
           throw new Error(`No commit found`);
         }
         expect(commit).toBe(data.commit);
         expect(repo).toBe(data.repo);
+
         return Promise.resolve({
-          pull: data.pull,
-          user: data.user,
-          links: {
-            user: `[@${data.user}](https://github.com/${data.user})`,
-            pull:
-              data.pull != null
-                ? `[#${data.pull}](https://github.com/${data.repo}/pull/${data.pull})`
-                : null,
-            commit: `[\`${data.commit}\`](https://github.com/${data.repo}/commit/${data.commit})`,
+          commit: {
+            sha: data.commit,
+            url: urls.commit(data),
+            markdownLink: `[\`${data.commit}\`](${urls.commit(data)})`,
           },
+          author: {
+            login: data.author,
+            url: urls.author(data),
+            markdownLink: `[@${data.author}](${urls.author(data)})`,
+          },
+          pull:
+            data.pull != null
+              ? {
+                  number: data.pull,
+                  url: urls.pull(data),
+                  markdownLink: `[#${data.pull}](${urls.pull(data)})`,
+                }
+              : undefined,
         });
       },
-      async getInfoFromPullRequest({
-        pull,
-        repo,
-      }): ReturnType<typeof getInfoFromPullRequest> {
+      async getPullRequestInfo({ pull, repo }): Promise<PullRequestInfo> {
         const data = changes.find((c) => c.pull === pull);
-        if (!data) {
+        if (!data || data.pull == null) {
           throw new Error(`No pull request found`);
         }
         expect(pull).toBe(data.pull);
         expect(repo).toBe(data.repo);
         return Promise.resolve({
-          commit: data.commit,
-          user: data.user,
-          links: {
-            user: `[@${data.user}](https://github.com/${data.user})`,
-            pull: `[#${data.pull}](https://github.com/${data.repo}/pull/${data.pull})`,
-            commit: `[\`${data.commit}\`](https://github.com/${data.repo}/commit/${data.commit})`,
+          commit: {
+            sha: data.commit,
+            url: urls.commit(data),
+            markdownLink: `[\`${data.commit}\`](${urls.commit(data)})`,
+          },
+          author: {
+            login: data.author,
+            url: urls.author(data),
+            markdownLink: `[@${data.author}](${urls.author(data)})`,
+          },
+          pull: {
+            number: data.pull,
+            url: urls.pull(data),
+            markdownLink: `[#${data.pull}](${urls.pull(data)})`,
           },
         });
       },
@@ -131,7 +150,7 @@ describe.each([changeData.commit, "wrongcommit", undefined])(
     describe.each(["pr", "pull request", "pull"])(
       "override pr with %s keyword",
       (keyword) => {
-        test.each(["with #", "without #"] as const)("%s", async (kind) => {
+        it.each(["with #", "without #"] as const)("%s", async (kind) => {
           expect(
             await getReleaseLine(
               ...getChangeset(
@@ -157,7 +176,7 @@ describe.each([changeData.commit, "wrongcommit", undefined])(
   },
 );
 
-test("with multiple authors", async () => {
+it("with multiple authors", async () => {
   expect(
     await getReleaseLine(
       ...getChangeset(
@@ -173,7 +192,7 @@ test("with multiple authors", async () => {
   `);
 });
 
-test("change without a pull release", async () => {
+it("change without a pull release", async () => {
   expect(
     await getReleaseLine(
       ...getChangeset(
@@ -189,7 +208,7 @@ test("change without a pull release", async () => {
   `);
 });
 
-test("change without a pull release, exclude option", async () => {
+it("change without a pull release, exclude option", async () => {
   expect(
     await getReleaseLine(
       ...getChangeset("author: @ncontiero", changeData.commit, { pr: true }),
@@ -202,7 +221,7 @@ test("change without a pull release, exclude option", async () => {
   `);
 });
 
-test("change without a pull release and user", async () => {
+it("change without a pull release and user", async () => {
   expect(
     await getReleaseLine(
       ...getChangeset(
@@ -221,7 +240,7 @@ test("change without a pull release and user", async () => {
   `);
 });
 
-test("change without a pull release and user, exclude option", async () => {
+it("change without a pull release and user, exclude option", async () => {
   expect(
     await getReleaseLine(
       ...getChangeset("author: @ncontiero", changeData.commit, {
@@ -237,7 +256,7 @@ test("change without a pull release and user, exclude option", async () => {
   `);
 });
 
-test("change with a pull release and without user", async () => {
+it("change with a pull release and without user", async () => {
   expect(
     await getReleaseLine(
       ...getChangeset("author: @ncontiero", changeData.commit, { user: true }),
@@ -250,7 +269,7 @@ test("change with a pull release and without user", async () => {
   `);
 });
 
-test("change without a commit, exclude option", async () => {
+it("change without a commit, exclude option", async () => {
   expect(
     await getReleaseLine(
       ...getChangeset("author: @ncontiero", changeData.commit, {
@@ -265,7 +284,7 @@ test("change without a commit, exclude option", async () => {
   `);
 });
 
-test("change without a commit and pull release, exclude option", async () => {
+it("change without a commit and pull release, exclude option", async () => {
   expect(
     await getReleaseLine(
       ...getChangeset("author: @ncontiero", changeData.commit, {
@@ -281,7 +300,7 @@ test("change without a commit and pull release, exclude option", async () => {
   `);
 });
 
-test("change without a commit, pull release and user, exclude option", async () => {
+it("change without a commit, pull release and user, exclude option", async () => {
   expect(
     await getReleaseLine(
       ...getChangeset("author: @ncontiero", changeData.commit, {
@@ -298,7 +317,7 @@ test("change without a commit, pull release and user, exclude option", async () 
   `);
 });
 
-test("override pr, commit, and author simultaneously", async () => {
+it("override pr, commit, and author simultaneously", async () => {
   expect(
     await getReleaseLine(
       ...getChangeset(
@@ -314,7 +333,7 @@ test("override pr, commit, and author simultaneously", async () => {
   `);
 });
 
-test("override with user keyword instead of author", async () => {
+it("override with user keyword instead of author", async () => {
   expect(
     await getReleaseLine(
       ...getChangeset("user: @ncontiero", changeData.commit),
@@ -327,7 +346,7 @@ test("override with user keyword instead of author", async () => {
   `);
 });
 
-test("ignoreUsers excludes the author from getInfo", async () => {
+it("ignoreUsers excludes the author from getInfo", async () => {
   expect(
     await getReleaseLine(
       ...getChangeset("", changeData.commit, undefined, ["ncontiero"]),
@@ -340,7 +359,7 @@ test("ignoreUsers excludes the author from getInfo", async () => {
   `);
 });
 
-test("ignoreUsers excludes the author from summary override", async () => {
+it("ignoreUsers excludes the author from summary override", async () => {
   expect(
     await getReleaseLine(
       ...getChangeset("author: @ncontiero", changeData.commit, undefined, [
@@ -355,7 +374,7 @@ test("ignoreUsers excludes the author from summary override", async () => {
   `);
 });
 
-test("ignoreUsers excludes only the ignored author when multiple exist", async () => {
+it("ignoreUsers excludes only the ignored author when multiple exist", async () => {
   expect(
     await getReleaseLine(
       ...getChangeset(
@@ -373,7 +392,7 @@ test("ignoreUsers excludes only the ignored author when multiple exist", async (
   `);
 });
 
-test("ignoreUsers is case-insensitive", async () => {
+it("ignoreUsers is case-insensitive", async () => {
   expect(
     await getReleaseLine(
       ...getChangeset("author: @NContiero", changeData.commit, undefined, [
