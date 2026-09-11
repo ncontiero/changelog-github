@@ -2,7 +2,7 @@
   "name": "@ncontiero/changelog-github",
   "type": "module",
   "version": "3.0.0",
-  "packageManager": "pnpm@12.3.4",
+  "packageManager": "pnpm@12.4.0",
   "description": "A custom changelog entry generator for Changesets on GitHub. Features advanced exclusion options, summary overrides, and links to commits, PRs, and authors.",
   "author": {
     "name": "Nicolas Contiero",
@@ -56,7 +56,7 @@
     "@ncontiero/eslint-config": "8.4.5",
     "@types/node": "26.5.0",
     "eslint": "10.10.0",
-    "tsdown": "0.22.7",
+    "tsdown": "0.23.0",
     "typescript": "6.0.3",
     "vitest": "4.1.10"
   }
